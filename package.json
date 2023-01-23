@@ -4,8 +4,8 @@
   "description": "SoftUni Course Project",
   "main": "src/index.js",
   "scripts": {
-    "start": "node ./src/index.js", 
-    "dev": "nodemon ./src/index.js"  
+    "start": "SET node_env=production&& node ./src/index.js",
+    "dev": "nodemon ./src/index.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
   "homepage": "https://github.com/JulianaGeorgi/SoftUni-Cubicle-2023#readme",
   "devDependencies": {
     "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   }
 }
