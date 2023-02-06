@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require('express').Router(); // new instance of the router
 
 const cubeController = require('./controllers/cubeController');
 const homeController = require('./controllers/homeController');
