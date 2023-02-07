@@ -7,7 +7,7 @@ exports.getCreateCube = (req, res) => {
 exports.postCreateCube = async (req, res) => {
     const { name, description, imageUrl, difficultyLevel } = req.body;
 
-    let cube = new Cube({name, description, imageUrl, difficultyLevel});
+    let cube = new Cube({ name, description, imageUrl, difficultyLevel });
 
     await cube.save();
 
@@ -17,7 +17,6 @@ exports.postCreateCube = async (req, res) => {
 exports.getDetails = async (req, res) => {
 
     const cube = await Cube.findById(req.params.cubeId).lean(); // cubeId param comes from the route!!! -> router.get('/details/:cubeId', cubeController.getDetails);
-
 
     if (!cube) {
         return res.redirect('/404');
