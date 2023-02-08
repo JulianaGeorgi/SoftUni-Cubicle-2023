@@ -16,7 +16,7 @@ exports.postCreateCube = async (req, res) => {
 };
 
 exports.getDetails = async (req, res) => {
-    const cube = await Cube.findById(req.params.cubeId).populate('accessories').lean(); 
+    const cube = await Cube.findById(req.params.cubeId).populate('accessories').lean();
 
     if (!cube) {
         return res.redirect('/404');
@@ -27,17 +27,17 @@ exports.getDetails = async (req, res) => {
 
 exports.getAttachAccessory = async (req, res) => {
     const cube = await Cube.findById(req.params.cubeId).lean();
-    const accessories = await Accessory.find().lean();
-    
-    res.render('cube/attach', {cube, accessories});
+    const accessories = await Accessory.find({ _id: { $nin: cube.accessories } }).lean(); // find all accessories whose ids are not in the current cube's accessories
+
+    res.render('cube/attach', { cube, accessories });
 };
 
-exports.postAttachAccessory = async (req, res)=> {
+exports.postAttachAccessory = async (req, res) => {
     const cube = await Cube.findById(req.params.cubeId); // it's without lean, so we can work with the document directly
     const accessoryId = req.body.accessory; // comes from attach.hbs, the select name
-    cube.accessories.push(accessoryId); 
+    cube.accessories.push(accessoryId);
 
     await cube.save();
-    
+
     res.redirect(`/cubes/${cube._id}/details`);
 };
