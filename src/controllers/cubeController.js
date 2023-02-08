@@ -16,14 +16,13 @@ exports.postCreateCube = async (req, res) => {
 };
 
 exports.getDetails = async (req, res) => {
-
-    const cube = await Cube.findById(req.params.cubeId).lean(); // cubeId param comes from the route!!! -> router.get('/details/:cubeId', cubeController.getDetails);
+    const cube = await Cube.findById(req.params.cubeId).populate('accessories').lean(); 
 
     if (!cube) {
         return res.redirect('/404');
     }
 
-    res.render('details', { cube });
+    res.render('cube/details', { cube });
 };
 
 exports.getAttachAccessory = async (req, res) => {
