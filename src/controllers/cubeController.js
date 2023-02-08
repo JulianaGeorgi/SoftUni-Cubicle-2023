@@ -36,6 +36,8 @@ exports.postAttachAccessory = async (req, res)=> {
     const cube = await Cube.findById(req.params.cubeId); // it's without lean, so we can work with the document directly
     const accessoryId = req.body.accessory; // comes from attach.hbs, the select name
     cube.accessories.push(accessoryId); 
-    cube.save();
+
+    await cube.save();
+    
     res.redirect(`/cubes/${cube._id}/details`);
 };
